@@ -1,0 +1,75 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{color}
+\usepackage{listings} 
+
+\begin{document}
+\title{Execise of EOPL}
+\author{Mu Lei known as NalaGinrut\\nalaginrut@gmail.com}
+\lstdefinestyle{custom-lisp}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Lisp,
+  showstringspaces=false,
+}
+\maketitle
+\newtheorem{defn}{Definition}[section]
+\chapter{Execise 1.1}
+\section{$\{3n + 2 \mid n \in \mathbb{N} \}$}
+\begin{defn}[\bf top-down]
+A natural number $n$ is in $S$ if and only if
+\begin{enumerate}
+\item 
+$n=2$, or
+\item 
+$\frac{n-2}{3} \in S.$
+\end{enumerate}
+\lstset{language=Lisp,escapechar=@,style=custom-lisp}
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+(define (func x)
+  (if (= x 2)
+      2 
+      (if (natural? (/ (- x 2) 3))
+           (func (/ (- x 2) 3)) 
+           #f)))
+\end{lstlisting}
+{\bf hint:} Find the first elem, check each elem iterately, when the final result of {\color{red} inverse function} is the first elem, accept it.
+The first elem equal to recursive-exit.
+\end{defn}
+\begin{defn}[\bf bottom-up]
+Define the set $S$ to be the smallest contained in $\mathbb{N}$ and satisfying the following two properties:
+\begin{enumerate}
+\item
+$2 \in S$, and
+\item
+if $n \in S$, then $ 3n+2 \in S. $
+\end{enumerate}
+\lstset{language=Lisp,escapechar=@,style=custom-lisp}
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+(define (func n) 
+  (let lp((i 0) (ret '()))
+    (cond 
+      ((>= i n) (reverse ret))
+      (else (lp (+ 2 (* 3 i)) 
+                (cons (+ (* 3 i) 2) ret))))))
+\end{lstlisting}
+{\bf hint:} Find the first minimum set. and add each check each elem from the minimum set which satisfying the inverse function.
+\end{defn}
+
+\begin{defn}[\bf rules of inference]
+to be continued...
+\end{defn}
+
+\section{problem 2}
+\begin{defn}
+asdf
+\end{defn}
+$ a \not\in S $
+
+\end{document}
+\documentstyle{article}
